@@ -3,9 +3,6 @@
  * 8/26/13
  */
 
-import java.lang.IndexOutOfBoundsException;
-import java.lang.IllegalArgumentException;
-
 public class Percolation {
 
     private int size;
@@ -51,33 +48,33 @@ public class Percolation {
 
         int rmod = i-1;
         int cmod = j-1;
-        int mod_index = rmod * size + cmod;
-        blocked[mod_index] = false;
+        int modIndex = rmod * size + cmod;
+        blocked[modIndex] = false;
         // Connect to left cell
         if (j > 1 && isOpen(i, j-1))
             //qfalg.union(mod_index, rmod * size + (cmod-1));
-            wqualg.union(mod_index, rmod * size + (cmod-1));
+            wqualg.union(modIndex, rmod * size + (cmod-1));
         // Connect to right cell
         if (j < size && isOpen(i, j+1))
             //qfalg.union(mod_index, rmod * size + (cmod+1));
-            wqualg.union(mod_index, rmod * size + (cmod+1));
+            wqualg.union(modIndex, rmod * size + (cmod+1));
         // Connect to upper cell
         if (i > 1 && isOpen(i-1, j))
             //qfalg.union(mod_index, (rmod-1) * size + cmod);
-            wqualg.union(mod_index, (rmod-1) * size + cmod);
+            wqualg.union(modIndex, (rmod-1) * size + cmod);
         // Connect to lower cell
         if (i < size && isOpen(i+1, j))
             //qfalg.union(mod_index, (rmod+1) * size + cmod);
-            wqualg.union(mod_index, (rmod+1) * size + cmod);
+            wqualg.union(modIndex, (rmod+1) * size + cmod);
         // If it's on the top row, connect it to the top cell.
         if (i == 1) {
             //qfalg.union(mod_index, size * size);
-            wqualg.union(mod_index, size * size);
+            wqualg.union(modIndex, size * size);
         }
         // If it's on the bottom row, connect it to the bottom cell.
         if (i == size) {
             //qfalg.union(mod_index, size * size + 1);
-            wqualg.union(mod_index, size * size + 1);
+            wqualg.union(modIndex, size * size + 1);
         }
     }
 
@@ -94,8 +91,8 @@ public class Percolation {
 
         int rmod = i-1;
         int cmod = j-1;
-        int mod_index = rmod * size + cmod;
-        return !blocked[mod_index];
+        int modIndex = rmod * size + cmod;
+        return !blocked[modIndex];
     }
 
     /*
@@ -113,10 +110,10 @@ public class Percolation {
 
         int rmod = i-1;
         int cmod = j-1;
-        int mod_index = rmod * size + cmod;
+        int modIndex = rmod * size + cmod;
         // Return whether or not the input node is connected to the top node.
         //return qfalg.connected(mod_index, size * size);
-        return wqualg.connected(mod_index, size * size);
+        return wqualg.connected(modIndex, size * size);
     }
 
     /*

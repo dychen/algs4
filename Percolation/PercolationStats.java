@@ -3,8 +3,6 @@
  * 8/26/13
  */
 
-import java.lang.IllegalArgumentException;
-
 public class PercolationStats {
     private double mean;
     private double stddev;
@@ -82,11 +80,11 @@ public class PercolationStats {
      * (e.g. 400 100)
      */
     public static void main(String[] args) {
-        StdOut.println("Enter the grid dimension N " + 
-                           "(must be a positive integer): ");
+        StdOut.println("Enter the grid dimension N "
+                        + "(must be a positive integer): ");
         int N = StdIn.readInt();
-        StdOut.println("Enter the number of trials T " + 
-                           "(must be a positive integer): ");
+        StdOut.println("Enter the number of trials T "
+                        + "(must be a positive integer): ");
         int T = StdIn.readInt();
         Stopwatch sw = new Stopwatch();
         PercolationStats ps = new PercolationStats(N, T);

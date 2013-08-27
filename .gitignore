@@ -1,5 +1,6 @@
 *.jar
 *.class
+*.zip
 checkstyle-5.5/
 findbugs-2.0.1/
 log.txt
