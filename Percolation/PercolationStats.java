@@ -23,14 +23,12 @@ public class PercolationStats {
         int col;
         // Perform percolation experiments
         for (int i = 0; i < T; i++) {
-            StdOut.printf("Trial # %d\n", i+1);
             Percolation p = new Percolation(N);
             counts = 0;
             while (!p.percolates()) {
                 p.openRandom();
                 counts++;
             }
-            StdOut.println(counts);
             numOpenSites[i] = ((double) counts) / (N * N);
         }
         // Calculate statistics.
@@ -85,10 +83,13 @@ public class PercolationStats {
         StdOut.println("Enter the number of trials T " + 
                            "(must be a positive integer): ");
         int T = StdIn.readInt();
+        Stopwatch sw = new Stopwatch();
         PercolationStats ps = new PercolationStats(N, T);
+        double elapsedTime = sw.elapsedTime();
         StdOut.printf("mean                    = %f\n", ps.mean());
         StdOut.printf("stddev                  = %f\n", ps.stddev());
         StdOut.printf("95%% confidence interval = %f, %f\n", ps.confidenceLo(),
                       ps.confidenceHi());
+        StdOut.printf("Elapsed Time            = %fs\n", elapsedTime);
     }
 }
