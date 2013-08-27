@@ -5,7 +5,7 @@ import java.lang.IllegalArgumentException;
 public class Percolation {
 
     private int size;
-    public ArrayList<Integer> blocked;
+    private boolean[] blocked;
     private QuickFindUF qfalg;
 
     /* 
@@ -18,10 +18,10 @@ public class Percolation {
         }
 
         size = N;
-        blocked = new ArrayList<Integer>();
+        blocked = new boolean[N * N];
         // Initialize the grid of blocked cells.
         for (int i = 0; i < N * N; i++) {
-            blocked.add(i);
+            blocked[i] = true;
         }
 
         // Initialize the QF representation of these cells.
@@ -46,6 +46,7 @@ public class Percolation {
         int rmod = i-1;
         int cmod = j-1;
         int mod_index = rmod * size + cmod;
+        blocked[mod_index] = false;
         // Connect to left cell
         if (j > 1 && isOpen(i, j-1))
             qfalg.union(mod_index, rmod * size + (cmod-1));
@@ -82,7 +83,7 @@ public class Percolation {
         int rmod = i-1;
         int cmod = j-1;
         int mod_index = rmod * size + cmod;
-        return !blocked.contains(mod_index);
+        return !blocked[mod_index];
     }
 
     /*
@@ -120,15 +121,15 @@ public class Percolation {
      * Chooses a random open cell and opens it.
      */
     public void openRandom() {
-        //StdOut.println(blocked);
-        //StdIn.readInt();
-        double rand = StdRandom.random();
-        int blockedIdx = (int) Math.floor(rand * blocked.size());
-        int idx = blocked.remove(blockedIdx);
-        //StdOut.printf("Size: %d\n", blocked.size());
-        //StdOut.printf("Removed: %d\n", blockedIdx);
-        int row = idx / size + 1; // + 1 because open() params are
-        int col = idx % size + 1; // 1-indexed
-        open(row, col);
+        while (true) {
+            double rand = StdRandom.random();
+            int idx = (int) Math.floor(rand * size * size);
+            int row = idx / size + 1; // + 1 because open() params are
+            int col = idx % size + 1; // 1-indexed
+            if (!isOpen(row, col)) {
+                open(row, col);
+                break;
+            }
+        }
     }
 }
