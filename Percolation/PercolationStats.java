@@ -1,3 +1,8 @@
+/*
+ * Daniel Chen
+ * 8/26/13
+ */
+
 import java.lang.IllegalArgumentException;
 
 public class PercolationStats {
