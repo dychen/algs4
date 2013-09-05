@@ -29,7 +29,7 @@ public class PercolationStats {
             Percolation p = new Percolation(N);
             counts = 0;
             while (!p.percolates()) {
-                p.openRandom();
+                openRandom(p, N);
                 counts++;
             }
             numOpenSites[i] = ((double) counts) / (N * N);
@@ -94,5 +94,23 @@ public class PercolationStats {
         StdOut.printf("95%% confidence interval = %f, %f\n", ps.confidenceLo(),
                       ps.confidenceHi());
         StdOut.printf("Elapsed Time            = %fs\n", elapsedTime);
+    }
+
+    /* Helper functions */
+
+        /*
+     * Chooses a random open cell and opens it.
+     */
+    private void openRandom(Percolation p, int size) {
+        while (true) {
+            double rand = StdRandom.random();
+            int idx = (int) Math.floor(rand * size * size);
+            int row = idx / size + 1; // + 1 because open() params are
+            int col = idx % size + 1; // 1-indexed
+            if (!p.isOpen(row, col)) {
+                p.open(row, col);
+                break;
+            }
+        }
     }
 }

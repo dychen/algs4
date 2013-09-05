@@ -127,20 +127,4 @@ public class Percolation {
         //return qfalg.connected(size * size, size * size + 1);
         return wqualg.connected(size * size, size * size + 1);
     }
-
-    /*
-     * Chooses a random open cell and opens it.
-     */
-    public void openRandom() {
-        while (true) {
-            double rand = StdRandom.random();
-            int idx = (int) Math.floor(rand * size * size);
-            int row = idx / size + 1; // + 1 because open() params are
-            int col = idx % size + 1; // 1-indexed
-            if (!isOpen(row, col)) {
-                open(row, col);
-                break;
-            }
-        }
-    }
 }
