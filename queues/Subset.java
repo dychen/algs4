@@ -1,4 +1,12 @@
+/*
+ * Daniel Chen
+ * 10/14/13
+ */
+
 public class Subset {
+    /*
+     * Create a new RandomizedQueue, enqueue the input, then dequeue k items.
+     */
     public static void main(String[] args) {
         String input;
         RandomizedQueue<String> rq = new RandomizedQueue<String>();
