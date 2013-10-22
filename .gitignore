@@ -1,6 +1,9 @@
 *.jar
 *.class
 *.zip
+*.txt
+*.png
+*.swp
 checkstyle-5.5/
 findbugs-2.0.1/
 log.txt
